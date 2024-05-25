@@ -11,6 +11,22 @@ use Illuminate\Support\Str;
 class ProjectController extends Controller
 {
     
+    public function project_list(){
+            $obj = array();
+            $data = ProjectList::all();
+            foreach($data as $d){
+                $obj[] = array(
+                    'id' => $d->id,
+                    'name' => $d->nama_client,
+                    'acara' => $d->jenis,
+                    'template' => $d->template,
+                    'status' =>'finished',
+                    'email' => $d->email,
+                );
+            }
+            return response()->json($obj);
+    }
+
     public function project_store(Request $request){
         DB::beginTransaction();
         try {

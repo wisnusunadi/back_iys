@@ -21,6 +21,7 @@ Route::post('/register', App\Http\Controllers\Api\RegisterController::class)->na
 Route::post('/login', App\Http\Controllers\Api\LoginController::class)->name('login');
 Route::post('/logout', App\Http\Controllers\Api\LogoutController::class)->name('logout');
 Route::post('/project/store',  [App\Http\Controllers\ProjectController::class, 'project_store']);
+Route::get('/project/list',  [App\Http\Controllers\ProjectController::class, 'project_list']);
     
 
 
