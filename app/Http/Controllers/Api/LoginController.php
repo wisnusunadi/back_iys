@@ -46,4 +46,6 @@ class LoginController extends Controller
             'token'   => $token
         ], 200);
     }
+
+    
 }
