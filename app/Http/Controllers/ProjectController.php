@@ -11,6 +11,25 @@ use Illuminate\Support\Str;
 class ProjectController extends Controller
 {
     
+    public function project_list_detail($id){
+    
+    
+    $obj = array();
+    try {
+        //code...
+        $data = ProjectList::find($id);
+        $obj['namaKlien'] = 'namaKU';
+        // $obj = json_decode($data->isi);
+    
+        return response()->json($obj);    
+    } catch (\Throwable $th) {
+        //throw $th;
+        return response()->json($obj);   
+    }
+ 
+    
+    }
+   
     public function project_list(){
             $obj = array();
             $data = ProjectList::all();
