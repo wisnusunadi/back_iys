@@ -7,10 +7,114 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use File;
 
 class ProjectController extends Controller
 {
     
+    public function project_list_update(Request $request,$id){
+        
+        DB::beginTransaction();
+        try {
+            $data = ProjectList::find($id);
+            $pastData = json_decode($data->isi);
+            //code...
+            $fotoWanita =  $request->fotoWanita;
+            $fotoPria = $request->fotoPria;
+            $gambarUtama = $request->gambarUtama;
+            $gambarCover = $request->gambarCover;
+            
+            if ($request->file('fotoPria')) {
+                    File::delete(public_path('project/'.$pastData->fotoPria));
+                    $image = $request->fotoPria;
+                    $name = base64_encode(Str::random(32)).'.'.$image->getClientOriginalExtension();
+                    $destinationPath = public_path('/project');
+                    $image->move($destinationPath, $name);
+                    $fotoPria = $name;
+               }
+             if ($request->file('fotoWanita')) {
+                    File::delete(public_path('project/'.$pastData->fotoWanita));
+                    $image = $request->fotoWanita;
+                    $name = base64_encode(Str::random(32)).'.'.$image->getClientOriginalExtension();
+                    $destinationPath = public_path('/project');
+                    $image->move($destinationPath, $name);
+                    $fotoWanita = $name;
+               }
+             if ($request->file('gambarUtama')) {
+                    File::delete(public_path('project/'.$pastData->gambarUtama));
+                    $image = $request->gambarUtama;
+                    $name = base64_encode(Str::random(32)).'.'.$image->getClientOriginalExtension();
+                    $destinationPath = public_path('/project');
+                    $image->move($destinationPath, $name);
+                    $gambarUtama = $name;
+               }
+             if ($request->file('gambarCover')) {
+                    File::delete(public_path('project/'.$pastData->gambarCover));
+                    $image = $request->gambarCover;
+                    $name = base64_encode(Str::random(32)).'.'.$image->getClientOriginalExtension();
+                    $destinationPath = public_path('/project');
+                    $image->move($destinationPath, $name);
+                    $gambarCover = $name;
+               }
+
+            $formData = array(
+                "namaKlien" => $request->namaKlien,
+                "emailKlien" => $request->emailKlien,
+                "acara" => $request->acara,
+                "template" => $request->template,
+                "namaPasangan" => $request->namaPasangan,
+                "musik" => $request->musik,
+                "namaPria" => $request->namaPria,
+                "kataPengantar" => $request->kataPengantar,
+                "pesan" => $request->pesan,
+                "namaLengkapPria" => $request->namaLengkapPria,
+                "ayahPria" => $request->ayahPria,
+                "ibuPria" => $request->ibuPria,
+                "namaWanita" => $request->namaWanita,
+                "namaLengkapWanita" => $request->namaLengkapWanita,
+                "ayahWanita" => $request->ayahWanita,
+                "ibuWanita" => $request->ibuWanita,
+                "alamatResepsi" => $request->alamatResepsi,
+                "tglResepsi" => $request->tglResepsi,
+                "waktuResepsi" => $request->waktuResepsi,
+                'fotoWanita'=> $fotoWanita,
+                'fotoPria'=> $fotoPria,
+                'gambarUtama'=> $gambarUtama,
+                'gambarCover'=> $gambarCover
+               );
+
+
+           
+            $data->nama_client = $request->namaKlien;
+            $data->email = $request->emailKlien;
+            $data->isi = json_encode($formData);
+            $data->link = strtolower(str_replace(' ', '-', $request->namaPasangan));
+            $data->template = $request->template;
+            $data->jenis = $request->acara;
+            $data->save();
+
+
+
+
+          DB::commit();
+            return response()->json([
+                'error' => false,
+                'message' => 'ok',
+                'data' => ''
+               ],201);
+
+        } catch (\Throwable $th) {
+            //throw $th;
+            DB::rollBack();
+            return response()->json([
+                'error' => true,
+                'message' => 'nok',
+                'data' => $th->getMessage()
+               ],500);
+        }
+
+    }
+
     public function project_list_detail($id){
     
     
@@ -18,8 +122,8 @@ class ProjectController extends Controller
     try {
         //code...
         $data = ProjectList::find($id);
-        $obj['namaKlien'] = 'namaKU';
-        // $obj = json_decode($data->isi);
+        // $obj['namaKlien'] = 'namaKU';
+        $obj = json_decode($data->isi);
     
         return response()->json($obj);    
     } catch (\Throwable $th) {
@@ -129,7 +233,7 @@ class ProjectController extends Controller
             DB::rollBack();
             return response()->json([
                 'error' => true,
-                'message' => 'ok',
+                'message' => 'nok',
                 'data' => $th->getMessage()
                ],500);
         }

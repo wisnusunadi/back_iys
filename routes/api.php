@@ -23,6 +23,7 @@ Route::post('/logout', App\Http\Controllers\Api\LogoutController::class)->name('
 Route::post('/project/store',  [App\Http\Controllers\ProjectController::class, 'project_store']);
 Route::get('/project/list',  [App\Http\Controllers\ProjectController::class, 'project_list']);
 Route::get('/project/detail/{id}',  [App\Http\Controllers\ProjectController::class, 'project_list_detail']);
+Route::post('/project/update/{id}',  [App\Http\Controllers\ProjectController::class, 'project_list_update']);
     
 
 
