@@ -11,9 +11,33 @@ use File;
 
 class ProjectController extends Controller
 {
-    
+
+    public function project_list_delete($id){
+        DB::beginTransaction();
+        try {
+        //code...
+        $data = ProjectList::find($id);
+        $data->delete();
+
+        DB::commit();
+        return response()->json([
+            'error' => false,
+            'message' => 'ok',
+            'data' => ''
+           ],200);
+      } catch (\Throwable $th) {
+        //throw $th;
+        DB::rollBack();
+        return response()->json([
+            'error' => true,
+            'message' => 'nok',
+            'data' => ''
+           ],500);
+      }
+    }
+
     public function project_list_update(Request $request,$id){
-        
+
         DB::beginTransaction();
         try {
             $data = ProjectList::find($id);
@@ -23,7 +47,7 @@ class ProjectController extends Controller
             $fotoPria = $request->fotoPria;
             $gambarUtama = $request->gambarUtama;
             $gambarCover = $request->gambarCover;
-            
+
             if ($request->file('fotoPria')) {
                     File::delete(public_path('project/'.$pastData->fotoPria));
                     $image = $request->fotoPria;
@@ -84,7 +108,7 @@ class ProjectController extends Controller
                );
 
 
-           
+
             $data->nama_client = $request->namaKlien;
             $data->email = $request->emailKlien;
             $data->isi = json_encode($formData);
@@ -116,24 +140,24 @@ class ProjectController extends Controller
     }
 
     public function project_list_detail($id){
-    
-    
+
+
     $obj = array();
     try {
         //code...
         $data = ProjectList::find($id);
         // $obj['namaKlien'] = 'namaKU';
         $obj = json_decode($data->isi);
-    
-        return response()->json($obj);    
+
+        return response()->json($obj);
     } catch (\Throwable $th) {
         //throw $th;
-        return response()->json($obj);   
+        return response()->json($obj);
     }
- 
-    
+
+
     }
-   
+
     public function project_list(){
             $obj = array();
             $data = ProjectList::all();
@@ -185,7 +209,7 @@ class ProjectController extends Controller
                     $image->move($destinationPath, $name);
                     $gambarCover = $name;
                }
-             
+
                $formData = array(
                 "namaKlien" => $request->namaKlien,
                 "emailKlien" => $request->emailKlien,
@@ -242,5 +266,5 @@ class ProjectController extends Controller
     }
 
 
-    
+
 }
