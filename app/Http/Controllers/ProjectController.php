@@ -146,19 +146,26 @@ class ProjectController extends Controller
     try {
         //code...
         $data = ProjectList::find($id);
-        // $obj['namaKlien'] = 'namaKU';
         $obj = json_decode($data->isi);
 
-        return response()->json($obj);
+        return response()->json([
+                'data' => $obj,
+                'message' => 'Berhasil',
+            ],200);
     } catch (\Throwable $th) {
         //throw $th;
-        return response()->json($obj);
+        return response()->json([
+            'data' => $obj,
+            'message' => 'Kesalahan Server',
+        ],500);
     }
 
 
     }
 
     public function project_list(){
+        try {
+            //code...
             $obj = array();
             $data = ProjectList::all();
             foreach($data as $d){
@@ -171,7 +178,19 @@ class ProjectController extends Controller
                     'email' => $d->email,
                 );
             }
-            return response()->json($obj);
+            return response()->json([
+                'data' => $obj,
+                'message' => 'Berhasil',
+            ],200);
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json([
+                'data' => $obj,
+                'message' => 'Kesalahan Server',
+            ],500);
+        }
+
+
     }
 
     public function project_store(Request $request){
