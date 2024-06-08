@@ -12,6 +12,17 @@ use File;
 class ProjectController extends Controller
 {
 
+    public function get_undangan($value){
+        $getProject = ProjectList::where('link',$value);
+        if($getProject->count() > 0){
+            return 'ada';
+        }else{
+            return 'kosong';
+        }
+        return 'kososng';
+    
+    }
+
     public function project_list_delete($id){
         DB::beginTransaction();
         try {
