@@ -231,6 +231,25 @@ class ProjectController extends Controller
             ],500);
         }
     }
+    public function music_detail($id){
+        $data = MusicList::find($id);
+        $name = $data->nama;
+        $filePath = public_path('project/' . $name);
+        if(file_exists($filePath)){
+            $fileStream = fopen($filePath, 'r');
+            return response()->stream(function () use ($fileStream) {
+                fpassthru($fileStream);
+            }, 200, [
+                'Content-Type' => mime_content_type($filePath),
+                'Content-Disposition' => 'inline; filename="' . $name . '"',
+            ]);
+        }else{
+            return response()->json([
+                'data' => array(),
+                'message' => 'Kesalahan Server',
+            ],500);
+        }
+    }
     public function music_list(){
         try {
             //code...
