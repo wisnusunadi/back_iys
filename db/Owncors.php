@@ -16,6 +16,7 @@ class Owncors
      */
     public function handle(Request $request, Closure $next)
     {
+        \Log::info('YourCustomMiddleware is being executed.');
         // return $next($request)
         // ->header('Access-Control-Allow-Origin', '*')
         // ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS')

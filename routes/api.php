@@ -31,5 +31,3 @@ Route::post('/project/update/{id}',  [App\Http\Controllers\ProjectController::cl
 Route::delete('/project/delete/{id}',  [App\Http\Controllers\ProjectController::class, 'project_list_delete']);
 
 
-
-

@@ -16,55 +16,30 @@ class Owncors
      */
     public function handle(Request $request, Closure $next)
     {
-        // // return $next($request)
-        // // ->header('Access-Control-Allow-Origin', '*')
-        // // ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS')
-        // // ->header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+        // Define the headers
+    $headers = [
+        'Access-Control-Allow-Origin' => '*',
+        'Access-Control-Allow-Methods' => 'POST, GET, OPTIONS, PUT, PATCH, DELETE',
+        'Access-Control-Allow-Headers' => 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Authorization, Access-Control-Request-Headers',
+    ];
 
-
-
-
-        // //lama
-        // header("Access-Control-Allow-Origin: *");
-        // // header('Access-Control-Allow-Credentials', 'true');
-
-        // $headers = [
-        //     'Access-Control-Allow-Methods' => 'POST, GET, OPTIONS, PUT, DELETE',
-        //     'Access-Control-Allow-Headers' => 'Content-Type, X-Auth-Token, Origin, Authorization, X-Requested-With',
-        //     // 'Access-Control-Allow-Credentials' => 'true'
-        // ];
-        // if ($request->getMethod() == "OPTIONS") {
-        //     return response('OK')
-        //         ->withHeaders($headers);
-        // }
-
-        // $response = $next($request);
-        // foreach ($headers as $key => $value)
-        //     $response->header($key, $value);
-        // return $response;
-        $response = $next($request);
-$IlluminateResponse = 'Illuminate\Http\Response';
-$SymfonyResopnse = 'Symfony\Component\HttpFoundation\Response';
-$headers = [
-    'Access-Control-Allow-Origin' => '*',
-    'Access-Control-Allow-Methods' => 'POST, GET, OPTIONS, PUT, PATCH, DELETE',
-    'Access-Control-Allow-Headers' => 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Authorization , Access-Control-Request-Headers',
-];
-
-if($response instanceof $IlluminateResponse) {
-    foreach ($headers as $key => $value) {
-        $response->header($key, $value);
+    // Handle OPTIONS request
+    if ($request->isMethod('OPTIONS')) {
+        return response('OK', 200)->withHeaders($headers);
     }
-    return $response;
-}
 
-if($response instanceof $SymfonyResopnse) {
+    // Proceed with the request
+    $response = $next($request);
+
+    // Set the headers on the response
     foreach ($headers as $key => $value) {
-        $response->headers->set($key, $value);
+        if ($response instanceof \Illuminate\Http\Response) {
+            $response->header($key, $value);
+        } elseif ($response instanceof \Symfony\Component\HttpFoundation\Response) {
+            $response->headers->set($key, $value);
+        }
     }
-    return $response;
-}
 
-return $response;
+    return $response;
     }
 }

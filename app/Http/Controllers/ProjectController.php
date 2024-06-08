@@ -307,12 +307,23 @@ class ProjectController extends Controller
     }
 
     public function project_store(Request $request){
-        DB::beginTransaction();
+      
+      //  DB::beginTransaction();
         try {
             $fotoWanita = '';
             $fotoPria = '';
             $gambarUtama = '';
             $gambarCover = '';
+             if ($request->gallery) {
+                foreach ($request->file('gallery') as $file) {
+                    $image = $file;
+                    $name = base64_encode(Str::random(32)).'.'.$image->getClientOriginalExtension();
+                    $destinationPath = public_path('/project');
+                    $image->move($destinationPath, $name);
+                    $fotoGallery[] = $name;
+                }
+             }
+
              if ($request->fotoPria) {
                     $image = $request->fotoPria;
                     $name = base64_encode(Str::random(32)).'.'.$image->getClientOriginalExtension();
@@ -365,7 +376,8 @@ class ProjectController extends Controller
                 'fotoWanita'=> $fotoWanita,
                 'fotoPria'=> $fotoPria,
                 'gambarUtama'=> $gambarUtama,
-                'gambarCover'=> $gambarCover
+                'gambarCover'=> $gambarCover,
+                'gallery'=> $fotoGallery
                );
 
 
@@ -375,7 +387,8 @@ class ProjectController extends Controller
                 'isi' => json_encode($formData),
                 'link' => strtolower(str_replace(' ', '-', $request->namaPasangan)),
                 'template' => $request->template,
-                'jenis' =>  $request->acara
+                'jenis' =>  $request->acara,
+                'music_list_id' =>  $request->musik
                ]);
 
                DB::commit();
