@@ -21,6 +21,9 @@ Route::post('/register', App\Http\Controllers\Api\RegisterController::class)->na
 Route::post('/login', App\Http\Controllers\Api\LoginController::class)->name('login');
 Route::post('/logout', App\Http\Controllers\Api\LogoutController::class)->name('logout');
 Route::post('/project/store',  [App\Http\Controllers\ProjectController::class, 'project_store']);
+Route::get('/music/list',  [App\Http\Controllers\ProjectController::class, 'music_list'])->middleware('jwt.verify');
+Route::delete('/music/delete/{id}',  [App\Http\Controllers\ProjectController::class, 'music_delete'])->middleware('jwt.verify');
+Route::post('/music/store',  [App\Http\Controllers\ProjectController::class, 'music_store'])->middleware('jwt.verify');
 Route::get('/project/list',  [App\Http\Controllers\ProjectController::class, 'project_list'])->middleware('jwt.verify');
 Route::get('/project/detail/{id}',  [App\Http\Controllers\ProjectController::class, 'project_list_detail'])->middleware('jwt.verify');
 Route::post('/project/update/{id}',  [App\Http\Controllers\ProjectController::class, 'project_list_update']);

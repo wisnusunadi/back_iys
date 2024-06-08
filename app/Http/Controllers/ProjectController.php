@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MusicList;
 use App\Models\ProjectList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -22,6 +23,31 @@ class ProjectController extends Controller
         return 'kososng';
     
     }
+
+    public function music_delete($id){
+        DB::beginTransaction();
+        try {
+        //code...
+        $data = MusicList::find($id);
+        $data->delete();
+
+        DB::commit();
+        return response()->json([
+            'error' => false,
+            'message' => 'ok',
+            'data' => ''
+           ],200);
+      } catch (\Throwable $th) {
+        //throw $th;
+        DB::rollBack();
+        return response()->json([
+            'error' => true,
+            'message' => 'nok',
+            'data' => ''
+           ],500);
+      }
+    }
+
 
     public function project_list_delete($id){
         DB::beginTransaction();
@@ -174,6 +200,63 @@ class ProjectController extends Controller
 
     }
 
+    public function music_store(Request $request){
+        DB::beginTransaction();
+        try {
+            //code...
+            if ($request->file('files')[0]) {
+                $music = $request->file('files')[0];
+                $name = base64_encode(Str::random(32)).'.'.$music->getClientOriginalExtension();
+                $destinationPath = public_path('/project');
+                $music->move($destinationPath, $name);
+                $music = $music->getClientOriginalName();
+                
+                MusicList::create([
+                    'nama' => $name,
+                    'nama_original' => $music,
+                    'kategori' => 'semua',
+                ]);
+            }
+            DB::commit();
+            return response()->json([
+                'data' => [],
+                'message' => 'Berhasil',
+            ],200);
+        } catch (\Throwable $th) {
+            //throw $th;
+            DB::rollBack();
+            return response()->json([
+                'data' => array(),
+                'message' => 'Kesalahan Server',
+            ],500);
+        }
+    }
+    public function music_list(){
+        try {
+            //code...
+              //code...
+              $obj = array();
+              $data = MusicList::all();
+              foreach($data as $d){
+                  $obj[] = array(
+                      'id' => $d->id,
+                      'file' => $d->nama,
+                      'judul' => $d->nama_original,
+                      'kategori' => $d->kategori,
+                  );
+              }
+              return response()->json([
+                  'data' => $obj,
+                  'message' => 'Berhasil',
+              ],200);
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json([
+                'data' => $obj,
+                'message' => 'Kesalahan Server',
+            ],500);
+        }
+    }
     public function project_list(){
         try {
             //code...
