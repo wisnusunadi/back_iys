@@ -22,6 +22,7 @@ Route::post('/login', App\Http\Controllers\Api\LoginController::class)->name('lo
 Route::post('/logout', App\Http\Controllers\Api\LogoutController::class)->name('logout');
 Route::post('/project/store',  [App\Http\Controllers\ProjectController::class, 'project_store']);
 Route::get('/music/detail/{id}',  [App\Http\Controllers\ProjectController::class, 'music_detail']);
+Route::get('/template/list/{value}',  [App\Http\Controllers\ProjectController::class, 'template_list'])->middleware('jwt.verify');
 Route::get('/music/list',  [App\Http\Controllers\ProjectController::class, 'music_list'])->middleware('jwt.verify');
 Route::delete('/music/delete/{id}',  [App\Http\Controllers\ProjectController::class, 'music_delete'])->middleware('jwt.verify');
 Route::post('/music/store',  [App\Http\Controllers\ProjectController::class, 'music_store'])->middleware('jwt.verify');

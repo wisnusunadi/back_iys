@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\MusicList;
 use App\Models\ProjectList;
+use App\Models\TemplateList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use File;
+use Illuminate\Support\Carbon;
 
 class ProjectController extends Controller
 {
@@ -16,7 +18,14 @@ class ProjectController extends Controller
     public function get_undangan($value){
         $getProject = ProjectList::where('link',$value);
         if($getProject->count() > 0){
-            return 'ada';
+            $getdata = ProjectList::find($getProject->first()->id);
+            $data = json_decode($getdata->isi);
+            $pasangan = explode(" ", $data->namaPasangan);
+            $data->pasangan = $pasangan;
+            $data->tglResepsiId = Carbon::parse($data->tglResepsi)->isoFormat('D MMMM YYYY', 'Do MMMM YYYY');
+            $data->bgmusik = MusicList::find($data->musik)->nama;
+
+            return view('wedding-1',compact('data'));
         }else{
             return 'kosong';
         }
@@ -329,6 +338,32 @@ class ProjectController extends Controller
             ],500);
     }
     }
+    public function template_list($jenis){
+    try {
+        //code...
+         //code...
+              //code...
+              $obj = array();
+              $data = TemplateList::where('jenis',$jenis);
+              foreach($data as $d){
+                  $obj[] = array(
+                      'id' => $d->id,
+                      'nama' => $d->nama,
+                      'preview' => $d->preview,
+                  );
+              }
+              return response()->json([
+                  'data' => $obj,
+                  'message' => 'Berhasil',
+              ],200);
+    } catch (\Throwable $th) {
+        //throw $th;
+        return response()->json([
+            'data' => $obj,
+            'message' => 'Kesalahan Server',
+        ],500);
+    }
+    }
     public function music_list(){
         try {
             //code...
@@ -368,6 +403,7 @@ class ProjectController extends Controller
                     'template' => $d->template,
                     'status' =>'finished',
                     'email' => $d->email,
+                    'link' => $d->link,
                 );
             }
             return response()->json([
