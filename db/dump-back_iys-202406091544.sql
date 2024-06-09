@@ -70,6 +70,33 @@ INSERT INTO `migrations` VALUES (1,'2014_10_12_000000_create_users_table',1),(2,
 UNLOCK TABLES;
 
 --
+-- Table structure for table `music_list`
+--
+
+DROP TABLE IF EXISTS `music_list`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `music_list` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nama` text DEFAULT NULL,
+  `nama_original` varchar(100) DEFAULT NULL,
+  `kategori` varchar(100) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `music_list`
+--
+
+LOCK TABLES `music_list` WRITE;
+/*!40000 ALTER TABLE `music_list` DISABLE KEYS */;
+/*!40000 ALTER TABLE `music_list` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `password_resets`
 --
 
@@ -140,10 +167,13 @@ CREATE TABLE `project_list` (
   `link` text DEFAULT NULL,
   `template` text DEFAULT NULL,
   `jenis` text DEFAULT NULL,
+  `music_list_id` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  PRIMARY KEY (`id`),
+  KEY `project_list_FK` (`music_list_id`),
+  CONSTRAINT `project_list_FK` FOREIGN KEY (`music_list_id`) REFERENCES `music_list` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -152,7 +182,6 @@ CREATE TABLE `project_list` (
 
 LOCK TABLES `project_list` WRITE;
 /*!40000 ALTER TABLE `project_list` DISABLE KEYS */;
-INSERT INTO `project_list` VALUES (12,'Wisnu Doremi123','wisnu@gmail.com','{\"namaKlien\":\"Wisnu Doremi123\",\"emailKlien\":\"wisnu@gmail.com\",\"acara\":\"birthday\",\"template\":\"wedding-3\",\"namaPasangan\":\"Wisnu & Poppy\",\"musik\":\"song 3\",\"namaPria\":\"Nama Pria\",\"kataPengantar\":\"Kata Pengantar\",\"pesan\":\"Pesan Pesan\",\"namaLengkapPria\":\"Nama Lengkap Pria\",\"ayahPria\":\"Nama Ayah Priam\",\"ibuPria\":\"Nama Ibu Pria\",\"namaWanita\":\"Jeje Slebew\",\"namaLengkapWanita\":\"Megawati SK\",\"ayahWanita\":\"Nama Ayah Wanita\",\"ibuWanita\":\"Nama Ibu Wanita\",\"alamatResepsi\":\"Jl Kemanga 123\",\"tglResepsi\":\"2024-05-30\",\"waktuResepsi\":\"12:03\",\"fotoWanita\":\"UlZEeUU4M0tMM3Q3SWgzdnV4NWlWQ2NkVUVVU1JnYkw=.jpg\",\"fotoPria\":\"UmtDeDRndTBLeXRoQTVEWmo2QVJaMkpBSmtaTUxGQkc=.jpg\",\"gambarUtama\":\"Q2x2R2xneXVOa3M5cGtSQ0Nvc2ZVaGF4V2l0Sjh6dEg=.jpg\",\"gambarCover\":\"VTZibEdhWEZKY3ppUFNhd3lOOGsxQ0sxQ0R6QnUyMzk=.webp\"}','wisnu-&-poppy','wedding-3','birthday','2024-05-30 08:58:28','2024-05-30 09:14:30');
 /*!40000 ALTER TABLE `project_list` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -200,4 +229,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-30 23:42:25
+-- Dump completed on 2024-06-09 15:44:50
