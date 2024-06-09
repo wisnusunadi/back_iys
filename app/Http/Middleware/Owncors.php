@@ -17,6 +17,8 @@ class Owncors
     public function handle(Request $request, Closure $next)
     {
         // Define the headers
+
+        if ($request->is('api/music/detail/*')) {
     $headers = [
         'Access-Control-Allow-Origin' => '*',
         'Access-Control-Allow-Methods' => 'POST, GET, OPTIONS, PUT, PATCH, DELETE',
@@ -40,6 +42,26 @@ class Owncors
         }
     }
 
+   
+    }
+    else{
+        header("Access-Control-Allow-Origin: *");
+        // header('Access-Control-Allow-Credentials', 'true');
+
+        $headers = [
+            'Access-Control-Allow-Methods' => 'POST, GET, OPTIONS, PUT, DELETE',
+            'Access-Control-Allow-Headers' => 'Content-Type, X-Auth-Token, Origin, Authorization, X-Requested-With',
+            // 'Access-Control-Allow-Credentials' => 'true'
+        ];
+        if ($request->getMethod() == "OPTIONS") {
+            return response('OK')
+                ->withHeaders($headers);
+        }
+
+        $response = $next($request);
+        foreach ($headers as $key => $value)
+            $response->header($key, $value);
+    }
     return $response;
     }
 }

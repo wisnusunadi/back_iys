@@ -42,7 +42,7 @@ class ProjectController extends Controller
         DB::rollBack();
         return response()->json([
             'error' => true,
-            'message' => 'nok',
+            'message' => 'Musik digunakan',
             'data' => ''
            ],500);
       }
@@ -74,7 +74,7 @@ class ProjectController extends Controller
     }
 
     public function project_list_update(Request $request,$id){
-
+        
         DB::beginTransaction();
         try {
             $data = ProjectList::find($id);
@@ -84,6 +84,23 @@ class ProjectController extends Controller
             $fotoPria = $request->fotoPria;
             $gambarUtama = $request->gambarUtama;
             $gambarCover = $request->gambarCover;
+            $fotoGallery = $pastData->gallery;
+
+            if ($request->file('gallery')) {
+                foreach ($pastData->gallery as $past) {
+                    File::delete(public_path('project/'.$past));
+                }
+                $fotoGallery = array();
+                foreach ($request->file('gallery') as $file) {
+                    $image = $file;
+                    $name = base64_encode(Str::random(32)).'.'.$image->getClientOriginalExtension();
+                    $destinationPath = public_path('/project');
+                    $image->move($destinationPath, $name);
+                    $fotoGallery[] = $name;
+                }
+                
+
+            }
 
             if ($request->file('fotoPria')) {
                     File::delete(public_path('project/'.$pastData->fotoPria));
@@ -141,7 +158,8 @@ class ProjectController extends Controller
                 'fotoWanita'=> $fotoWanita,
                 'fotoPria'=> $fotoPria,
                 'gambarUtama'=> $gambarUtama,
-                'gambarCover'=> $gambarCover
+                'gambarCover'=> $gambarCover,
+                'gallery'=> $fotoGallery
                );
 
 
@@ -152,6 +170,7 @@ class ProjectController extends Controller
             $data->link = strtolower(str_replace(' ', '-', $request->namaPasangan));
             $data->template = $request->template;
             $data->jenis = $request->acara;
+            $data->music_list_id = $request->musik;
             $data->save();
 
 
@@ -182,14 +201,64 @@ class ProjectController extends Controller
     $obj = array();
     try {
         //code...
+        $gambarUtamaView = "";
+        $gambarCoverView = "";
+        $fotoPriaView = "";
+        $fotoWanitaView = "";
+        $galleryView = array();
+
+
+
+
+        $Music = MusicList::all();
+        foreach($Music as $d){
+            $musicList[] = array(
+                'id' => $d->id,
+                'file' => $d->nama,
+                'judul' => $d->nama_original,
+                'kategori' => $d->kategori,
+            );
+        }
+
         $data = ProjectList::find($id);
         $obj = json_decode($data->isi);
 
+        
+        if(count($obj->gallery) > 0){
+        foreach ($obj->gallery as $g) {
+            $galleryView[] = asset('project/'.$g);
+        }
+        }
+
+
+
+        $get_gambarUtama = public_path('project/'.$obj->gambarUtama);
+        $get_gambarCover = public_path('project/'.$obj->gambarCover);
+        $get_fotoPria = public_path('project/'.$obj->fotoPria);
+        $get_fotoWanita = public_path('project/'.$obj->fotoWanita);
+
+        if (file_exists($get_gambarUtama)&& file_exists($get_gambarCover) &&
+        file_exists($get_fotoPria)&& file_exists($get_fotoWanita)) {
+            $gambarUtamaView = asset('project/'.$obj->gambarUtama);
+            $gambarCoverView = asset('project/'.$obj->gambarCover);
+            $fotoPriaView = asset('project/'.$obj->fotoPria);
+            $fotoWanitaView = asset('project/'.$obj->fotoWanita);
+        }
+
+        $obj->fotoPriaView = $fotoPriaView;
+        $obj->fotoWanitaView = $fotoWanitaView;
+        $obj->gambarUtamaView = $gambarUtamaView;
+        $obj->gambarCoverView = $gambarCoverView;
+        $obj->musicList = $musicList;
+        $obj->galleryView = $galleryView;
         return response()->json([
                 'data' => $obj,
                 'message' => 'Berhasil',
             ],200);
-    } catch (\Throwable $th) {
+
+
+
+        } catch (\Throwable $th) {
         //throw $th;
         return response()->json([
             'data' => $obj,
@@ -232,6 +301,9 @@ class ProjectController extends Controller
         }
     }
     public function music_detail($id){
+        try {
+            //code...
+   
         $data = MusicList::find($id);
         $name = $data->nama;
         $filePath = public_path('project/' . $name);
@@ -249,6 +321,13 @@ class ProjectController extends Controller
                 'message' => 'Kesalahan Server',
             ],500);
         }
+    } catch (\Throwable $th) {
+        //throw $th;   
+        return response()->json([
+                'data' => array(),
+                'message' => 'Kesalahan Server',
+            ],500);
+    }
     }
     public function music_list(){
         try {
@@ -314,6 +393,7 @@ class ProjectController extends Controller
             $fotoPria = '';
             $gambarUtama = '';
             $gambarCover = '';
+            $fotoGallery = array();
              if ($request->gallery) {
                 foreach ($request->file('gallery') as $file) {
                     $image = $file;
