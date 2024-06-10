@@ -27,7 +27,7 @@ Route::get('/music/list',  [App\Http\Controllers\ProjectController::class, 'musi
 Route::delete('/music/delete/{id}',  [App\Http\Controllers\ProjectController::class, 'music_delete'])->middleware('jwt.verify');
 Route::post('/music/store',  [App\Http\Controllers\ProjectController::class, 'music_store'])->middleware('jwt.verify');
 Route::get('/project/list',  [App\Http\Controllers\ProjectController::class, 'project_list'])->middleware('jwt.verify');
-Route::get('/project/detail/{id}',  [App\Http\Controllers\ProjectController::class, 'project_list_detail'])->middleware('jwt.verify');
+Route::get('/project/detail/{id}',  [App\Http\Controllers\ProjectController::class, 'project_list_detail']);
 Route::post('/project/update/{id}',  [App\Http\Controllers\ProjectController::class, 'project_list_update']);
 Route::delete('/project/delete/{id}',  [App\Http\Controllers\ProjectController::class, 'project_list_delete']);
 

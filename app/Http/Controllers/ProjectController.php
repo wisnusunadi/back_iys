@@ -340,16 +340,15 @@ class ProjectController extends Controller
     }
     public function template_list($jenis){
     try {
-        //code...
-         //code...
-              //code...
+        
               $obj = array();
               $data = TemplateList::where('jenis',$jenis);
-              foreach($data as $d){
+              foreach($data->get() as $d){
                   $obj[] = array(
                       'id' => $d->id,
                       'nama' => $d->nama,
                       'preview' => $d->preview,
+                      'preview_img' =>  asset('/template_web/preview/'.$d->preview)
                   );
               }
               return response()->json([

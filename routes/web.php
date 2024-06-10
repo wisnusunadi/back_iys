@@ -15,3 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/{value}', [App\Http\Controllers\ProjectController::class, 'get_undangan']);
+
+
+// Route::get('/link', function () {        
+//     $target = '/home/public_html/storage/app/public';
+//     $shortcut = '/home/public_html/public/storage';
+//     symlink($target, $shortcut);
+//  });

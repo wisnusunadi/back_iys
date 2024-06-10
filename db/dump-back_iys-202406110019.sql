@@ -84,7 +84,7 @@ CREATE TABLE `music_list` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,6 +93,7 @@ CREATE TABLE `music_list` (
 
 LOCK TABLES `music_list` WRITE;
 /*!40000 ALTER TABLE `music_list` DISABLE KEYS */;
+INSERT INTO `music_list` VALUES (14,'eHJzdmRFalhGY2tRRk0yQXpLOE5sbFNxeVNTNGFQYUU=.mp3','gilga scream.mp3','semua','2024-06-09 09:02:49','2024-06-09 09:02:49');
 /*!40000 ALTER TABLE `music_list` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -165,7 +166,7 @@ CREATE TABLE `project_list` (
   `email` text DEFAULT NULL,
   `isi` text DEFAULT NULL,
   `link` text DEFAULT NULL,
-  `template` text DEFAULT NULL,
+  `template` int(11) DEFAULT NULL,
   `jenis` text DEFAULT NULL,
   `music_list_id` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -173,7 +174,7 @@ CREATE TABLE `project_list` (
   PRIMARY KEY (`id`),
   KEY `project_list_FK` (`music_list_id`),
   CONSTRAINT `project_list_FK` FOREIGN KEY (`music_list_id`) REFERENCES `music_list` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -182,7 +183,34 @@ CREATE TABLE `project_list` (
 
 LOCK TABLES `project_list` WRITE;
 /*!40000 ALTER TABLE `project_list` DISABLE KEYS */;
+INSERT INTO `project_list` VALUES (23,'asyu123','asyyu@gmail.com','{\"namaKlien\":\"asyu123\",\"emailKlien\":\"asyyu@gmail.com\",\"acara\":\"wedding\",\"template\":\"1\",\"namaPasangan\":\"asdasdsda rer\",\"musik\":\"14\",\"namaPria\":\"asdsd\",\"kataPengantar\":\"asdasdasdsad\",\"pesan\":\"null\",\"namaLengkapPria\":\"asdsad\",\"ayahPria\":\"asd\",\"ibuPria\":\"sss\",\"namaWanita\":\"adasd\",\"namaLengkapWanita\":\"asd\",\"ayahWanita\":\"asd\",\"ibuWanita\":\"asdasd\",\"alamatResepsi\":\"asdasdasd\",\"tglResepsi\":\"2024-06-19\",\"waktuResepsi\":\"12:33\",\"fotoWanita\":\"UnZYbkxPVjhsMlY0Ykc3d3hKS1FSZTFMTlJZUHg5VzE=.jpg\",\"fotoPria\":\"M1pzcXJTVTVCWk1BU2NFNnJVU2l0NGFxbU90Q3hacG4=.jpg\",\"gambarUtama\":\"WG9DcjFqTktCZmYwalJHRGRjaUhpZmt0ak1EUm5kaXQ=.png\",\"gambarCover\":\"ODRFR3I4WXdpNTVKQXRNVU1MMmdWSE9mSGdCWlpKdEs=.jpg\",\"gallery\":[\"TllUaDZ0U1VCT21OVVpQMFlUdkJkTFYwd0s1Q092WlE=.jpg\"]}','asdasdsda-rer',1,'wedding',14,'2024-06-10 09:10:15','2024-06-10 10:18:26');
 /*!40000 ALTER TABLE `project_list` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `template_list`
+--
+
+DROP TABLE IF EXISTS `template_list`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `template_list` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nama` varchar(100) DEFAULT NULL,
+  `preview` varchar(100) DEFAULT NULL,
+  `jenis` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `template_list`
+--
+
+LOCK TABLES `template_list` WRITE;
+/*!40000 ALTER TABLE `template_list` DISABLE KEYS */;
+INSERT INTO `template_list` VALUES (1,'Dahlia','wedding-1.jpg','wedding'),(7,'Dahlia','wedding-1.jpg','wedding'),(8,'Dahlia','wedding-1.jpg','wedding');
+/*!40000 ALTER TABLE `template_list` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -229,4 +257,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-09 15:44:50
+-- Dump completed on 2024-06-11  0:19:57
