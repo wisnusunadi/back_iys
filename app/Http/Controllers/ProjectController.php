@@ -41,8 +41,8 @@ class ProjectController extends Controller
                 case "1":
                     return view('wedding-1', ['data' => $data, 'jenis' => $jenis]);
                     break;
-                case "2":
-                    return view('wedding-2', ['data' => $data, 'jenis' => $jenis]);
+                case "5":
+                    return view('wedding-5', ['data' => $data, 'jenis' => $jenis]);
                     break;
                 default:
                     return 'kosong';

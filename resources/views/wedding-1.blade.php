@@ -380,7 +380,7 @@
                 <div class="col-12 text-center">
                     <h2 class="font-alt fs-3 fw-bold text-uppercase text-light">We Can't Wait to See You!</h2>
                     @if($data->acara == 'wedding')
-                    <p class="font-alt fs-5 fst-italic text-light">{{$data->tglResepsiId}} | {{$data->alamatResepsi}}</p>
+                    <p class="font-alt fs-5 fst-italic text-light">{{$data->tglAkadId}} | {{$data->alamatAkad}}</p>
                     @elseif($data->acara == 'engagement')
                     <p class="font-alt fs-5 fst-italic text-light">{{$data->tglLamaranId}} | {{$data->alamatLamaran}}</p>
                     @endif
