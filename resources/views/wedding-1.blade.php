@@ -2,7 +2,7 @@
 <html lang="en" class="h-100 w-100">
 
 <head>
-    <title>Wedding Invitation</title>
+    <title>{{$jenis}}</title>
 
     <link rel="preload" href="{{ asset('template_web/wedding_1/css/style.min.css')}}" as="style">
     <link rel="preload" href="{{ asset('template_web/wedding_1/js/script.min.js')}}" as="script">
@@ -60,7 +60,7 @@
                         <li class="nav-item me-3">
                             <a class="nav-link page-scroll" href="#the-wedding-event">Events</a>
                         </li>
-                        
+
                     </ul>
 
                     <!-- Navbar brand (desktop) -->
@@ -103,9 +103,9 @@
                     <!-- //.img-clip-path -->
 
                     <div class="align-items-center d-flex justify-content-center mb-2">
-                        <h2 class="font-alt fw-bold m-0">{{$data->pasangan[0]}}</h2>
+                        <h2 class="font-alt fw-bold m-0">{{$data->namaPria}}</h2>
                         <span class="icon-svg icon-svg-lg mx-2"><img src="{{ asset('template_web/wedding_1/img/icon-wedding-ampersand.svg')}}" alt=""></span>
-                        <h2 class="font-alt fw-bold m-0">{{$data->pasangan[1]}}</h2>
+                        <h2 class="font-alt fw-bold m-0">{{$data->namaWanita}}</h2>
                     </div>
                     <!-- //.align-items-center -->
 
@@ -140,21 +140,50 @@
 
             <div class="row justify-content-center">
 
-                <!-- The Bride -->
-                <div class="col-lg-6 mb-5 mb-lg-0">
+                <!-- The Groom -->
+                <div class="col-lg-6">
                     <div class="row align-items-center">
                         <div class="col-md-6">
+                            @if($data->fotoWanita != '')
                             <div class="bg-white border mb-3 mb-md-0 p-2 position-relative">
-                                <img class="img-fluid" src="{{ asset('project/' . $data->fotoPria) }}" alt="">
+                                <img class="img-fluid" src="{{ asset('project/' . $data->fotoWanita) }}" alt="">
                                 <span class="bg-secondary bottom-0 end-0 font-alt fst-italic m-3 position-absolute px-3 py-2 rounded text-white">The Bride</span>
                             </div>
+                            @endif
+
+
+
                             <!-- //.bg-white -->
                         </div>
                         <!-- //.col-md-6 -->
 
                         <div class="col-md-6 text-center text-md-start">
-                            <h5 class="font-alt fw-bold text-uppercase">{{$data->namaPria}}</h5>
-                            <p class="font-alt fst-italic text-muted">Father & Mother</p>
+                            <h5 class="font-alt fw-bold text-uppercase">{{$data->namaLengkapWanita}}</h5>
+                            <p class="font-alt fst-italic text-muted">{{$data->ayahWanita}} & {{$data->ibuWanita}}</p>
+                            <hr class="border-secondary mx-auto mx-md-0 sep-line">
+                        </div>
+                        <!-- //.col-md-6 -->
+                    </div>
+                    <!-- //.row -->
+                </div>
+
+                <!-- The Bride -->
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            @if($data->fotoPria != '')
+                            <div class="bg-white border mb-3 mb-md-0 p-2 position-relative">
+                                <img class="img-fluid" src="{{ asset('project/' . $data->fotoPria) }}" alt="">
+                                <span class="bg-secondary bottom-0 end-0 font-alt fst-italic m-3 position-absolute px-3 py-2 rounded text-white">The Groom</span>
+                            </div>
+                            @endif
+                            <!-- //.bg-white -->
+                        </div>
+                        <!-- //.col-md-6 -->
+
+                        <div class="col-md-6 text-center text-md-start">
+                            <h5 class="font-alt fw-bold text-uppercase">{{$data->namaLengkapPria}}</h5>
+                            <p class="font-alt fst-italic text-muted">{{$data->ayahPria}} & {{$data->ibuPria}}</p>
                             <hr class="border-secondary mx-auto mx-md-0 sep-line">
                         </div>
                         <!-- //.col-md-6 -->
@@ -164,27 +193,7 @@
                 <!-- //.col-lg-6 -->
 
 
-                <!-- The Groom -->
-                <div class="col-lg-6">
-                    <div class="row align-items-center">
-                        <div class="col-md-6">
-                            <div class="bg-white border mb-3 mb-md-0 p-2 position-relative">
-                                <img class="img-fluid" src="{{ asset('project/' . $data->fotoWanita) }}" alt="">
-                                <span class="bg-secondary bottom-0 end-0 font-alt fst-italic m-3 position-absolute px-3 py-2 rounded text-white">The Groom</span>
-                            </div>
-                            <!-- //.bg-white -->
-                        </div>
-                        <!-- //.col-md-6 -->
 
-                        <div class="col-md-6 text-center text-md-start">
-                            <h5 class="font-alt fw-bold text-uppercase">{{$data->namaWanita}}</h5>
-                            <p class="font-alt fst-italic text-muted">Father & Mother</p>
-                            <hr class="border-secondary mx-auto mx-md-0 sep-line">
-                        </div>
-                        <!-- //.col-md-6 -->
-                    </div>
-                    <!-- //.row -->
-                </div>
                 <!-- //.col-lg-6 -->
             </div>
             <!-- //.row -->
@@ -206,7 +215,8 @@
                 <!-- //.col-12 -->
             </div>
             <!-- //.row -->
-
+            @if($data->acara == 'wedding')
+            @if($data->alamatAkad != '')
             <div class="row gx-lg-5 justify-content-center">
                 <div class="col-md-9 col-lg-6 col-xl-5 mb-5 mb-lg-0">
                     <div class="bg-white h-100 p-5 rounded shadow">
@@ -216,15 +226,15 @@
                         <div class="align-items-center d-flex mb-3">
                             <span class="icon-svg me-4"><img src="{{ asset('template_web/wedding_1/img/icon-wedding-calendar.svg')}}" alt=""></span>
                             <span>
-                            {{$data->tglResepsiId}} <br>
-                            {{$data->waktuResepsi}}pm - until end
+                                {{$data->tglAkadId}} <br>
+                                {{$data->waktuAkad}}pm - until end
                             </span>
                         </div>
                         <!-- //.align-items-center -->
 
                         <div class="align-items-center d-flex mb-4">
                             <span class="icon-svg me-4"><img src="{{ asset('template_web/wedding_1/img/icon-wedding-arch.svg')}}" alt=""></span>
-                            <span>{{$data->alamatResepsi}}
+                            <span>{{ $data->alamatAkad }}
                             </span>
                         </div>
                         <!-- //.align-items-center -->
@@ -237,8 +247,10 @@
                     </div>
                     <!-- //.bg-white -->
                 </div>
+                @endif
                 <!-- //.col-md-9 -->
 
+                @if($data->alamatResepsi != '' )
                 <div class="col-md-9 col-lg-6 col-xl-5">
                     <div class="bg-white h-100 p-5 rounded shadow">
                         <h3 class="font-alt fs-4 fw-bold text-uppercase">The Reception</h3>
@@ -268,6 +280,38 @@
                     </div>
                     <!-- //.bg-white -->
                 </div>
+                @endif
+                @elseif($data->acara == 'engagement')
+                <div class="col-md-9 col-lg-6 col-xl-5">
+                    <div class="bg-white h-100 p-5 rounded shadow">
+                        <h3 class="font-alt fs-4 fw-bold text-uppercase">The Engagement</h3>
+                        <hr class="border-secondary sep-line">
+
+                        <div class="align-items-center d-flex mb-3">
+                            <span class="icon-svg me-4"><img src="{{ asset('template_web/wedding_1/img/icon-wedding-calendar.svg')}}" alt=""></span>
+                            <span>
+                                {{$data->tglLamaranId}} <br>
+                                {{$data->waktuLamaran}}pm - until end
+                        </div>
+                        <!-- //.align-items-center -->
+
+                        <div class="align-items-center d-flex mb-4">
+                            <span class="icon-svg me-4"><img src="{{ asset('template_web/wedding_1/img/icon-wedding-cake.svg')}}" alt=""></span>
+                            <span>{{$data->alamatLamaran}}
+                            </span>
+                            </span>
+                        </div>
+                        <!-- //.align-items-center -->
+
+                        <div class="d-flex">
+                            <!-- <button type="button" data-bs-toggle="modal" data-bs-target="#how-to-get-there-modal" class="btn fs-9 ls-1 me-3">How To Get There</button> -->
+                            <!-- <a href="https://goo.gl/maps/Pzrjm2K3JorMkLVK9?coh=178572&entry=tt" class="page-scroll btn border-0 fs-9 ls-1 text-decoration-underline" target="_blank">View Map</a> -->
+                        </div>
+                        <!-- //.d-flex -->
+                    </div>
+                    <!-- //.bg-white -->
+                </div>
+                @endif
                 <!-- //.col-md-9 -->
             </div>
             <!-- //.row -->
@@ -278,34 +322,11 @@
     <!-- Section - The Wedding Event End -->
 
 
-   
 
 
-    <!-- Section - Proposed Start -->
-    <section id="messages" class="bg-img-cover bg-overlay position-relative">
-        <div class="container position-relative">
-            <div class="row g-0">
-                <div class="col-md-9 col-lg-6 col-xl-5 bg-white p-5 position-relative rounded">
-                    <h3 class="font-alt fs-4 fw-bold text-uppercase">Messages from Couple's</h3>
-                    <hr class="border-secondary sep-line">
-                    <!-- <p>He proposed on a Scrabble board. It's a game we've always loved.</p>
-                    <p>He glued the letters on, spelling "MILEA WILL YOU MARRY ME", and then asked if I wanted to play the game after dinner. He had me set up the game, and of course when I opened the board, I saw the letters spelling out the proposal!</p>
-                    <p>I was so awestruck, confused and surprised at the same time as he stood there ring in hand. I framed the board and have it hanging in our home.</p>
-                    <p class="font-alt fs-5 fst-italic mb-4">"Yes! Yes of course! Yes!"</p> -->
-                    {{$data->pesan}}
-                    <!-- Ornament -->
-                    <img width="100" src="img/ornament-divider.png" alt="" class="d-block mx-auto">
-                    <span class="ornament-corner ornament-primary"></span>
-                </div>
-                <!-- //.col-md-9 -->
-            </div>
-            <!-- //.row -->
-        </div>
-        <!-- //.container -->
-    </section>
-    <!-- Section - Proposed End -->
 
-
+    @if($data->acara == 'wedding')
+    @if(count($data->gallery) > 0)
     <!-- Section - Photos Start -->
     <section id="photos">
         <div class="container position-relative">
@@ -344,19 +365,26 @@
                 </div>
                 <!-- //.col-12 -->
             </div>
+
             <!-- //.row -->
         </div>
         <!-- //.container -->
     </section>
     <!-- Section - Photos End -->
-
+    @endif
+    @endif
     <!-- Footer Start -->
     <footer class="bg-img-cover bg-overlay position-relative">
         <div class="container position-relative">
             <div class="row">
                 <div class="col-12 text-center">
                     <h2 class="font-alt fs-3 fw-bold text-uppercase text-light">We Can't Wait to See You!</h2>
+                    @if($data->acara == 'wedding')
                     <p class="font-alt fs-5 fst-italic text-light">{{$data->tglResepsiId}} | {{$data->alamatResepsi}}</p>
+                    @elseif($data->acara == 'engagement')
+                    <p class="font-alt fs-5 fst-italic text-light">{{$data->tglLamaranId}} | {{$data->alamatLamaran}}</p>
+                    @endif
+
                     <img width="100" src="{{ asset('template_web/wedding_1/img/ornament-divider.png')}}" alt="" class="d-block mx-auto">
                 </div>
                 <!-- //.col-12 -->
@@ -370,9 +398,9 @@
     </footer>
     <!-- Footer End -->
     <audio autoplay>
-  <source src="{{asset('project/'.$data->bgmusik)}}" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
+        <source src="{{asset('project/'.$data->bgmusik)}}" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
 
     <!-- Required JS files -->
     <script src="{{ asset('template_web/wedding_1/js/script.min.js')}}"></script>
