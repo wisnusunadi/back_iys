@@ -25,12 +25,24 @@ class ProjectController extends Controller
             if ($getdata->jenis == 'wedding') {
                 // $pasangan = explode(" ", $data->namaPasangan);
                 // $data->pasangan = $pasangan;
-                $data->tglAkadId = Carbon::parse($data->tglAkad)->isoFormat('D MMMM YYYY', 'Do MMMM YYYY');
-                $data->tglResepsiId = $data->tglResepsi != '' ? Carbon::parse($data->tglResepsi)->isoFormat('D MMMM YYYY', 'Do MMMM YYYY') : '';
+                $data->tglAkadId = Carbon::parse($data->tglAkad)->isoFormat('dddd, Do MMMM YYYY');
+                $data->tglResepsiId = $data->tglResepsi != '' ? Carbon::parse($data->tglResepsi)->isoFormat('dddd, Do MMMM YYYY') : '';
                 $data->bgmusik = MusicList::find($data->musik)->nama;
                 $jenis = 'Wedding Invitation';
+
+                $data->dayOfWeek =  Carbon::parse($data->tglAkad)->isoFormat('dddd');
+                $data->dayOfMonth =  Carbon::parse($data->tglAkad)->isoFormat('Do');
+                $data->month =  Carbon::parse($data->tglAkad)->isoFormat('MMMM');
+                $data->year =  Carbon::parse($data->tglAkad)->isoFormat('YYYY');
+                $data->tglMulai = $data->tglAkad;
             } elseif ($getdata->jenis == 'engagement') {
-                $data->tglLamaranId = Carbon::parse($data->tglLamaran)->isoFormat('D MMMM YYYY', 'Do MMMM YYYY');
+
+                $data->dayOfWeek =  Carbon::parse($data->tglLamaran)->isoFormat('dddd');
+                $data->dayOfMonth =  Carbon::parse($data->tglLamaran)->isoFormat('Do');
+                $data->month =  Carbon::parse($data->tglLamaran)->isoFormat('MMMM');
+                $data->year =  Carbon::parse($data->tglLamaran)->isoFormat('YYYY');
+                $data->tglMulai = $data->tglLamaran;
+                $data->tglLamaranId = Carbon::parse($data->tglLamaran)->isoFormat('dddd, Do MMMM YYYY');
                 $data->bgmusik = MusicList::find($data->musik)->nama;
                 $jenis = 'Engagement Invitation';
             }
@@ -41,8 +53,32 @@ class ProjectController extends Controller
                 case "1":
                     return view('wedding-1', ['data' => $data, 'jenis' => $jenis]);
                     break;
+                case "2":
+                    return view('wedding-2', ['data' => $data, 'jenis' => $jenis]);
+                    break;
+                case "3":
+                    return view('wedding-3', ['data' => $data, 'jenis' => $jenis]);
+                    break;
+                case "4":
+                    return view('wedding-4', ['data' => $data, 'jenis' => $jenis]);
+                    break;
                 case "5":
                     return view('wedding-5', ['data' => $data, 'jenis' => $jenis]);
+                    break;
+                case "6":
+                    return view('wedding-6', ['data' => $data, 'jenis' => $jenis]);
+                    break;
+                case "7":
+                    return view('wedding-7', ['data' => $data, 'jenis' => $jenis]);
+                    break;
+                case "8":
+                    return view('wedding-8', ['data' => $data, 'jenis' => $jenis]);
+                    break;
+                case "9":
+                    return view('wedding-9', ['data' => $data, 'jenis' => $jenis]);
+                    break;
+                case "10":
+                    return view('wedding-10', ['data' => $data, 'jenis' => $jenis]);
                     break;
                 default:
                     return 'kosong';

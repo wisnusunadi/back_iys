@@ -96,13 +96,10 @@ Purchase:
 					<!-- <img src="images/header/name.png" alt="logo_img"> -->
 					<h2 style="color: white;">{{$data->namaPria}} & {{$data->namaWanita}}</h2>
 				</div>
-				@if($data->acara == 'wedding')
-				<div class="tp-caption   tp-resizeme tp-static-layer" id="slider-476-layer-2" data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['-30','-30','-30','-68']" data-fontsize="['30','30','30','40']" data-lineheight="['37','37','37','30']" data-width="none" data-height="none" data-whitespace="nowrap" data-type="text" data-responsive_offset="on" data-startslide="0" data-endslide="1" data-frames='[{"from":"z:0;rX:-45deg;rY:0;rZ:0;sX:0.75;sY:0.75;skX:0;skY:0;opacity:0;","speed":3000,"to":"o:1;","delay":1000,"ease":"Back.easeInOut"},{"delay":"wait","speed":300,"to":"opacity:0;","ease":"nothing"}]' data-textAlign="['left','left','left','left']" data-paddingtop="[50,50,50,100]" data-paddingright="[20,20,20,20]" data-paddingbottom="[2,2,2,60]" data-paddingleft="[20,20,20,20]" style="z-index: 7; white-space: nowrap; font-size: 30px;color:#f07677;font-family: 'Lora', serif;">{{$data->tglAkadId}} </div>
 
-				@elseif($data->acara == 'engagement')
-				<div class="tp-caption   tp-resizeme tp-static-layer" id="slider-476-layer-2" data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['-30','-30','-30','-68']" data-fontsize="['30','30','30','40']" data-lineheight="['37','37','37','30']" data-width="none" data-height="none" data-whitespace="nowrap" data-type="text" data-responsive_offset="on" data-startslide="0" data-endslide="1" data-frames='[{"from":"z:0;rX:-45deg;rY:0;rZ:0;sX:0.75;sY:0.75;skX:0;skY:0;opacity:0;","speed":3000,"to":"o:1;","delay":1000,"ease":"Back.easeInOut"},{"delay":"wait","speed":300,"to":"opacity:0;","ease":"nothing"}]' data-textAlign="['left','left','left','left']" data-paddingtop="[50,50,50,100]" data-paddingright="[20,20,20,20]" data-paddingbottom="[2,2,2,60]" data-paddingleft="[20,20,20,20]" style="z-index: 7; white-space: nowrap; font-size: 30px;color:#f07677;font-family: 'Lora', serif;">>{{$data->tglLamaranId}} </div>
+				<div class="tp-caption   tp-resizeme tp-static-layer" id="slider-476-layer-2" data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['-30','-30','-30','-68']" data-fontsize="['30','30','30','40']" data-lineheight="['37','37','37','30']" data-width="none" data-height="none" data-whitespace="nowrap" data-type="text" data-responsive_offset="on" data-startslide="0" data-endslide="1" data-frames='[{"from":"z:0;rX:-45deg;rY:0;rZ:0;sX:0.75;sY:0.75;skX:0;skY:0;opacity:0;","speed":3000,"to":"o:1;","delay":1000,"ease":"Back.easeInOut"},{"delay":"wait","speed":300,"to":"opacity:0;","ease":"nothing"}]' data-textAlign="['left','left','left','left']" data-paddingtop="[50,50,50,100]" data-paddingright="[20,20,20,20]" data-paddingbottom="[2,2,2,60]" data-paddingleft="[20,20,20,20]" style="z-index: 7; white-space: nowrap; font-size: 30px;color:#f07677;font-family: 'Lora', serif;">{{$data->dayOfMonth}} {{$data->month}} {{$data->year}} </div>
 
-				@endif
+
 
 
 				<div class="tp-caption tp-resizeme tp-static-layer" id="slider-477-layer-2" data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['-30','-30','-30','-68']" data-fontsize="['40','40','40','50']" data-lineheight="['37','37','37','30']" data-width="none" data-height="none" data-whitespace="nowrap" data-type="text" data-responsive_offset="on" data-startslide="0" data-endslide="1" data-frames='[{"from":"z:0;rX:-45deg;rY:0;rZ:0;sX:0.75;sY:0.75;skX:0;skY:0;opacity:0;","speed":3000,"to":"o:1;","delay":1000,"ease":"Back.easeInOut"},{"delay":"wait","speed":300,"to":"opacity:0;","ease":"nothing"}]' data-textAlign="['left','left','left','left']" data-paddingtop="[150,150,150,160]" data-paddingright="[20,20,20,20]" data-paddingbottom="[2,2,2,2]" data-paddingleft="[20,20,20,20]" style="z-index: 8; white-space: nowrap; font-size: 40px;font-family: 'Lora', serif;color:#ffffff;">SAVE THE DATE</div>
@@ -180,7 +177,7 @@ Purchase:
 								<img src="{{ asset('project/' . $data->fotoWanita) }}" alt="Groom" class="img-responsive">
 								@endif
 							</div>
-							<h2>>{{$data->namaLengkapWanita}}</h2>
+							<h2>{{$data->namaLengkapWanita}}</h2>
 							<p>(D/o {{$data->ayahWanita}} & {{$data->ibuWanita}})</p>
 							<ul>
 								<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
@@ -194,16 +191,13 @@ Purchase:
 							<h1>Invitation</h1>
 							<div class="wd_about_infobox_date">
 								<p>We inviting you and your family on</p>
+								<h3>{{$data->dayOfWeek}}</h3>
+								<h2>{{$data->dayOfMonth}}{{$data->month}}{{$data->year}}</h2>
 								@if($data->acara == 'wedding')
-
-								<h2>{{$data->tglAkadId}}</h2>
 								<p>{{$data->alamatAkad}}</p>
 								@elseif($data->acara == 'engagement')
-
-								<h2>{{$data->tglLamaranId}}</h2>
 								<p>{{$data->alamatLamaran}}</p>
 								@endif
-
 							</div>
 						</div>
 					</div>
@@ -229,10 +223,10 @@ Purchase:
 						<div class="wd_event_infobox">
 							<h2>Main Ceremony</h2>
 							<h1>{{$data->waktuAkad}} pm</h1>
-							<span>{{$data->alamatAkad}} /span>
+							<span>{{$data->alamatAkad}} </span>
 
-								<div class="clearfix"></div>
-								<a href="#"><img src="{{ asset('template_web/wedding_5/images/content/map.png')}}" alt="Map" class="img-responsive"></a>
+							<div class="clearfix"></div>
+							<a href="#"><img src="{{ asset('template_web/wedding_5/images/content/map.png')}}" alt="Map" class="img-responsive"></a>
 						</div>
 					</div>
 					@if($data->alamatResepsi != '' )
@@ -240,10 +234,10 @@ Purchase:
 						<div class="wd_event_infobox">
 							<h2>Wedding Party</h2>
 							<h1>{{$data->waktuResepsi}} pm</h1>
-							<span>{{$data->alamatResepsi}} /span>
+							<span>{{$data->alamatResepsi}} </span>
 
-								<div class="clearfix"></div>
-								<a href="#"><img src="{{ asset('template_web/wedding_5/images/content/map.png')}}" alt="Map" class="img-responsive"></a>
+							<div class="clearfix"></div>
+							<a href="#"><img src="{{ asset('template_web/wedding_5/images/content/map.png')}}" alt="Map" class="img-responsive"></a>
 						</div>
 					</div>
 					@endif
@@ -343,6 +337,49 @@ Purchase:
 		});
 	</script>
 	<!--main js file end-->
+
+	<script>
+		// JavaScript function to start and update countdown
+		function startCountdown(endDate) {
+			// Set the date we're counting down to
+			var countDownDate = new Date(endDate).getTime();
+
+			// Update the countdown every 1 second
+			var x = setInterval(function() {
+
+				// Get today's date and time
+				var now = new Date().getTime();
+
+				// Find the distance between now and the count down date
+				var distance = countDownDate - now;
+
+				// Time calculations for days, hours, minutes and seconds
+				var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+				var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+				var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+				var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+				// Display the result in the corresponding elements
+				document.getElementById("c_days").innerHTML = days;
+				document.getElementById("c_hours").innerHTML = hours;
+				document.getElementById("c_minutes").innerHTML = minutes;
+				document.getElementById("c_seconds").innerHTML = seconds;
+
+				// If the count down is finished, display a message
+				if (distance < 0) {
+					clearInterval(x);
+					document.getElementById("countdown").innerHTML = "EXPIRED";
+				}
+			}, 1000); // Update every 1 second
+		}
+
+		// Start the countdown on page load
+		window.onload = function() {
+			var endDate = "{{ $data->tglMulai }}"; // Replace with your end date
+			startCountdown(endDate);
+		};
+	</script>
+
 </body>
 <audio autoplay>
 	<source src="{{asset('project/'.$data->bgmusik)}}" type="audio/mpeg">
