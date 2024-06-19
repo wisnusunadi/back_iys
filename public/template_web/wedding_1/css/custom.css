@@ -1,11 +1,7 @@
-#hero {
-    background-image: url("../images/bg-hero.jpg")
-}
 
 #the-wedding-event {
-    background-image: url("../images/bg-the-wedding-event.jpg")
+    background-image: url("../images/wedding.webp")
 }
-
 #proposed {
     background-image: url("../images/bg-proposed.jpg")
 }
@@ -15,7 +11,8 @@
 }
 
 footer {
-    background-image: url("../images/bg-footer.jpg")
+    background-image: url("../images/celeb.webp")
 }
+
 
 /*# sourceMappingURL=custom.min.css.map */

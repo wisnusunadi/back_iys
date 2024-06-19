@@ -91,7 +91,7 @@
 	<div id="home" class="banner">
 		<div class="owl-carousel owl-theme full-screen">
 			<div class="item">
-				<img src="images/cover.webp" alt="Slider">
+				<img src="{{ asset('project/' . $data->gambarCover) }}" alt="Slider">
 				<div class="overlay-bg"></div>
 				<div class="container d-flex align-items-center h-center">
 					<div class="wrap-caption">
@@ -184,7 +184,7 @@
 						<div class="tab-content" id="pills-tabContent">
 							<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 								<div class="text-center">
-									<img src="images/cover.webp" alt="" class="shadow-lg img-fluid mb-3">
+									<img src="{{ asset('project/' . $data->gambarUtama) }}" alt="" class="shadow-lg img-fluid mb-3">
 									<h2>From us,</h2>
 									<p>{{$data->kataPengantar}}</p>
 								</div>

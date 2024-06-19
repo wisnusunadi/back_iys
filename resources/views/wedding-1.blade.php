@@ -90,7 +90,7 @@
 
 
     <!-- Section - Hero Start -->
-    <section id="hero" class="bg-img-cover bg-overlay position-relative">
+    <section id="hero" class="bg-img-cover bg-overlay position-relative" style="background-image: url('{{ asset('project/' . $data->gambarCover) }}')">
         <div class="container">
             <div class="row g-0 justify-content-center justify-content-lg-start">
                 <div class="col-md-9 col-lg-6 col-xl-5 bg-white px-4 py-5 position-relative rounded shadow">
@@ -112,7 +112,7 @@
                     <p class="fs-5 text-center text-muted">Request the honor of your presence at their wedding ceremony and reception.</p>
 
                     <!-- Ornament -->
-                    <img width="100" src="img/ornament-divider.png" alt="" class="d-block mx-auto">
+                    <img width="100" src="{{ asset('template_web/wedding_1/img/ornament-divider.png')}}" alt="" class="d-block mx-auto">
                     <span class="ornament-corner ornament-primary ornament-top"></span>
                     <span class="ornament-corner ornament-primary"></span>
                 </div>
