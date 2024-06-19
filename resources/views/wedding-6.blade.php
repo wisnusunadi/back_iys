@@ -67,7 +67,7 @@ Purchase:
 			<ul> <!-- SLIDE  -->
 				<li data-index="rs-1648" data-transition="fade" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="1000" data-thumb="" data-rotate="0" data-saveperformance="off" data-title="Slide" data-param1="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-param10="" data-description="">
 					<!-- MAIN IMAGE -->
-					<img src="{{ asset('template_web/wedding_6/images/header/slider.jpg')}}" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="3" class="rev-slidebg" data-no-retina>
+					<img src="{{ asset('project/' . $data->gambarCover) }}" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="3" class="rev-slidebg" data-no-retina>
 					<!-- LAYERS -->
 
 					<!-- LAYER NR. 5 -->
@@ -217,8 +217,9 @@ Purchase:
 
 						</div>
 					</div>
-					@if($data->alamatResepsi != '' )
+
 					<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 col-lg-push-4 col-md-push-4 col-sm-push-0">
+						@if($data->alamatResepsi != '' )
 						<div class="wd_event_infobox">
 							<h2>Wedding Party</h2>
 							<h1>{{$data->waktuResepsi}} pm</h1>
@@ -227,8 +228,9 @@ Purchase:
 							<div class="clearfix"></div>
 							<!-- <a href="#"><img src="{{ asset('template_web/wedding_5/images/content/map.png')}}" alt="Map" class="img-responsive"></a> -->
 						</div>
+						@endif
 					</div>
-					@endif
+
 					<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 col-lg-pull-4 col-md-pull-4 col-sm-pull-0">
 						<div class="wd_event_infobox">
 							<img src="{{ asset('template_web/wedding_6/images/content/event_img.gif')}}" alt="Event Image">
@@ -307,7 +309,7 @@ Purchase:
 						<div class="wd_heading wow fadeInDown" data-wow-delay="0.3s">
 							<h4>Messages from us </h4>
 							<h1>{{$data->namaPria}} & {{$data->namaWanita}}</h1>
-							<img src="{{ asset('template_web/wedding_6/images/content/heading.png')}}" alt="Heading" class="img-responsive">
+							<img src="{{ asset('project/' . $data->gambarUtama) }}" alt="Heading" class="img-responsive">
 						</div>
 					</div>
 					<div class="col-lg-8 col-md-10 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-1 col-sm-offset-0 col-xs-offset-0">

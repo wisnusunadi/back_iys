@@ -78,7 +78,7 @@
     <div class="sections">
       <!-- Home Section -->
       <section id="home" class="home-section clearfix">
-        <div id="hs-image-block" class="hs-image-block" style="background-image: url(images/main_photo_1.jpg); background-attachment: fixed; background-position: 50% 0;" data-stellar-background-ratio="0.3">
+        <div id="hs-image-block" class="hs-image-block" style="background-image: url('{{ asset('project/' . $data->gambarCover) }}');background-attachment: fixed; background-position: 50% 0;" data-stellar-background-ratio="0.3">
           <div class="hs-mask"></div>
         </div>
 
@@ -109,7 +109,7 @@
             </div>
 
             <div class="heart">
-              <img src="images/heart_img.png" alt="">
+              <img src="{{ asset('template_web/wedding_8/images/heart_img.png')}}" alt="">
             </div>
 
             <div class="about-us-block second-block">
@@ -143,6 +143,7 @@
           </div>
           <!-- Counter -->
           <div id="count" class="count"> <!-- You can edit HTML code of this block in the js/main.js -->
+
           </div>
           <!-- Counter -->
 
@@ -163,7 +164,7 @@
             <!-- Ceremony Block -->
             <div class="col-md-6 event-block">
               <div class="event-photo scale-image-effect">
-                <img src="{{ asset('template_web/wedding_8/images/photo_the_ceremony.jpg')}}" alt="">
+                <img src="{{ asset('template_web/wedding_8/images/wedding.webp')}}" alt="">
 
               </div>
 
@@ -183,7 +184,7 @@
             <!-- Party Block -->
             <div class="col-md-6 event-block">
               <div class="event-photo scale-image-effect">
-                <img src="{{ asset('template_web/wedding_8/images/photo_the_party.jpg')}}" alt="">
+                <img src="{{ asset('template_web/wedding_8/images/celeb.webp')}}" alt="">
               </div>
 
               <div class="event-title">
@@ -215,7 +216,7 @@
             <div class="row justify-content-center">
               <div class="col-md-6 event-block text-center">
                 <div class="event-photo scale-image-effect">
-                  <img src="images/photo_the_ceremony.jpg" alt="">
+                  <img src="{{ asset('template_web/wedding_8/images/wedding.webp')}}" alt="">
                 </div>
 
                 <div class="event-title">
@@ -263,7 +264,7 @@
       @endif
       <!-- Footer (Thank You block) -->
       <footer id="thanks" class="footer">
-        <div id="footer-image-block" class="footer-image-block" style="background-image: url(images/footer_photo.jpg); background-attachment: fixed; background-position: 50%;" data-stellar-background-ratio="0.3">
+        <div id="footer-image-block" class="footer-image-block" style="background-image: url('{{ asset('template_web/wedding_8/images/cover.webp')}}'); background-attachment: fixed; background-position: 50%;" data-stellar-background-ratio="0.3">
           <div class="footer-mask"></div>
         </div>
 

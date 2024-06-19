@@ -8,8 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <meta name="description" content="Our Love - Responsive Wedding Template" />
   <meta name="keywords" content="retina, responsive, wedding, rsvp, Our Love" />
-  <meta name="author" content="lmpixels (Linar Miftakhov)" />
-  <link rel="shortcut icon" href="{{ asset('template_web/wedding_9/favicon.ico')}}">
+  <link rel="shortcut icon" href="favicon.ico">
 
   <link rel="stylesheet" href="{{ asset('template_web/wedding_9/css/bootstrap.css')}}">
   <link rel="stylesheet" href="{{ asset('template_web/wedding_9/css/normalize.css')}}">
@@ -18,7 +17,8 @@
   <link rel="stylesheet" href="{{ asset('template_web/wedding_9/css/animate.css')}}">
   <link rel="stylesheet" href="{{ asset('template_web/wedding_9/css/main.css')}}" type="text/css">
 
-  <script src="{{ asset('template_web/wedding_9/js/jquery-1.12.4.min.js')}}"></script>
+  <script src="{{ asset('template_web/wedding_9/js/jquery-1.12.4.min.js')}}">
+  </script>
   <script src="{{ asset('template_web/wedding_9/js/modernizr.custom.js')}}"></script>
 </head>
 
@@ -38,12 +38,13 @@
     <header id="header" class="header">
       <div class="container clearfix">
         <div class="logo-container">
-          <div class="header-logo">{{$data->namaPria}} <span class="main-color">&amp;</span> {{$data->namaWanita}}</div>
+          <div class="header-logo">{{$data->namaPria}} <span class=" main-color">&amp;</span> {{$data->namaWanita}}</div>
+
         </div>
 
         <div class="header-date mobile-hidden">
-
           <p>{{$data->dayOfWeek}}, {{$data->dayOfMonth}} <span class="main-color"> {{$data->month}} </span> {{$data->year}}</p>
+
         </div>
         <a class="menu-toggle mobile-visible">
           <i class="fa fa-bars"></i>
@@ -77,7 +78,7 @@
     <div class="sections">
       <!-- Home Section -->
       <section id="home" class="home-section clearfix">
-        <div id="hs-image-block" class="hs-image-block" style="background-image: url(images/main_photo_1.jpg); background-attachment: fixed; background-position: 50% 0;" data-stellar-background-ratio="0.3">
+        <div id="hs-image-block" class="hs-image-block" style="background-image: url('{{ asset('project/' . $data->gambarCover) }}');background-attachment: fixed; background-position: 50% 0;" data-stellar-background-ratio="0.3">
           <div class="hs-mask"></div>
         </div>
 
@@ -92,6 +93,7 @@
                 <div class="name">
                   <h2>{{$data->namaPria}}</h2>
                   <p>{{$data->namaLengkapPria}}</p>
+
 
                 </div>
 
@@ -141,17 +143,16 @@
           </div>
           <!-- Counter -->
           <div id="count" class="count"> <!-- You can edit HTML code of this block in the js/main.js -->
+
           </div>
           <!-- Counter -->
 
           <p class="description">{{$data->kataPengantar}}</p>
-
         </div>
       </section>
       <!-- /Our Day Section -->
 
       @if($data->acara == 'wedding')
-
       <!-- Wedding Events Section -->
       <section id="events" class="our-story section-boxed">
         <div class="container">
@@ -163,7 +164,7 @@
             <!-- Ceremony Block -->
             <div class="col-md-6 event-block">
               <div class="event-photo scale-image-effect">
-                <img src="{{ asset('template_web/wedding_9/images/photo_the_ceremony.jpg')}}" alt="">
+                <img src="{{ asset('template_web/wedding_9/images/wedding.webp')}}" alt="">
 
               </div>
 
@@ -183,7 +184,7 @@
             <!-- Party Block -->
             <div class="col-md-6 event-block">
               <div class="event-photo scale-image-effect">
-                <img src="{{ asset('template_web/wedding_9/images/photo_the_party.jpg')}}" alt="">
+                <img src="{{ asset('template_web/wedding_9/images/celeb.webp')}}" alt="">
               </div>
 
               <div class="event-title">
@@ -204,8 +205,6 @@
       </section>
       <!-- /Wedding Events Section -->
       @elseif($data->acara == 'engagement')
-
-      <!-- Wedding Events Section -->
       <section id="events" class="our-story section-boxed">
         <div class="container">
           <div class="section-title">
@@ -217,7 +216,7 @@
             <div class="row justify-content-center">
               <div class="col-md-6 event-block text-center">
                 <div class="event-photo scale-image-effect">
-                  <img src="images/photo_the_ceremony.jpg" alt="">
+                  <img src="{{ asset('template_web/wedding_9/images/wedding.webp')}}" alt="">
                 </div>
 
                 <div class="event-title">
@@ -236,10 +235,9 @@
         </div>
       </section>
       @endif
-
+      <!-- Gallery Section -->
       @if($data->acara == 'wedding')
       @if(count($data->gallery) > 0)
-      <!-- Gallery Section -->
       <section id="gallery" class="gallery section-boxed section-bg-color">
         <div class="container">
           <div class="section-title">
@@ -259,7 +257,6 @@
             @endforeach
           </div>
           <!-- /Gallery Items -->
-
         </div>
       </section>
       <!-- /Gallery Section -->
@@ -267,7 +264,7 @@
       @endif
       <!-- Footer (Thank You block) -->
       <footer id="thanks" class="footer">
-        <div id="footer-image-block" class="footer-image-block" style="background-image: url(images/footer_photo.jpg); background-attachment: fixed; background-position: 50%;" data-stellar-background-ratio="0.3">
+        <div id="footer-image-block" class="footer-image-block" style="background-image: url('{{ asset('template_web/wedding_9/images/cover.webp')}}'); background-attachment: fixed; background-position: 50%;" data-stellar-background-ratio="0.3">
           <div class="footer-mask"></div>
         </div>
 
@@ -290,6 +287,7 @@
   <script src="{{ asset('template_web/wedding_9/js/jquery.countdown.js')}}"></script>
   <script src="{{ asset('template_web/wedding_9/js/jquery.malihu.PageScroll2id.min.js')}}"></script>
   <script src="{{ asset('template_web/wedding_9/js/main.js')}}"></script>
+
   <script>
     $(document).ready(function() {
       var startDate = '{{$data->tglMulai}}';
@@ -308,6 +306,5 @@
     Your browser does not support the audio element.
   </audio>
 </body>
-
 
 </html>

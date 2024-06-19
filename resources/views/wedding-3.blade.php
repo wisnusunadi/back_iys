@@ -96,7 +96,7 @@
 
                 <div id="custom-owl-slider" class="owl-slide" data-scroll-speed="2">
                     <div class="item">
-                        <img src="{{ asset('template_web/wedding_3/images/slider/1.jpg')}}" alt="">
+                        <img src="{{ asset('project/' . $data->gambarCover) }}" alt="">
                     </div>
             </section>
             <!-- section close -->

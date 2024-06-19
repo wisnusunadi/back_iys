@@ -72,7 +72,7 @@
                         <div class="row">
                             <div class="spacer-double"></div>
                             <div class="col-md-4 col-md-offset-4">
-                                <!-- <img src="images/misc/7.jpg" class="img-circle" alt=""> -->
+                                <img src="{{ asset('project/' . $data->gambarUtama) }}" class="img-circle" alt="">
                             </div>
 
                             <div class="col-md-8 col-md-offset-2">
@@ -204,7 +204,7 @@
                     @if($data->acara == 'wedding')
                     <div class="row">
                         <div class="col-md-6">
-                            <img src="{{ asset('template_web/wedding_3/images/misc/3.jpg')}}" alt="" class="img-responsive img-rounded wow fadeInLeft">
+                            <img src="{{ asset('template_web/wedding_4/images/misc/3.jpg')}}" alt="" class="img-responsive img-rounded wow fadeInLeft">
                         </div>
 
                         <div class="col-md-5 col-md-offset-1 pt40 pb40 wow fadeIn" data-wow-delay=".5s">
@@ -225,14 +225,14 @@
                         </div>
 
                         <div class="col-md-6 col-md-offset-1">
-                            <img src="{{ asset('template_web/wedding_3/images/misc/4.jpg')}}" alt="" class="img-responsive img-rounded wow fadeInRight">
+                            <img src="{{ asset('template_web/wedding_4/images/misc/4.jpg')}}" alt="" class="img-responsive img-rounded wow fadeInRight">
                         </div>
                     </div>
                     @endif
                     @elseif($data->acara == 'engagement')
                     <div class="row">
                         <div class="col-md-6">
-                            <img src="{{ asset('template_web/wedding_3/images/misc/3.jpg')}}" alt="" class="img-responsive img-rounded wow fadeInLeft">
+                            <img src="{{ asset('template_web/wedding_4/images/misc/3.jpg')}}" alt="" class="img-responsive img-rounded wow fadeInLeft">
                         </div>
 
                         <div class="col-md-5 col-md-offset-1 pt40 pb40 wow fadeIn" data-wow-delay=".5s">
