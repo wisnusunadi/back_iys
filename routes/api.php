@@ -30,6 +30,12 @@ Route::get('/project/list',  [App\Http\Controllers\ProjectController::class, 'pr
 Route::get('/project/detail/{id}',  [App\Http\Controllers\ProjectController::class, 'project_list_detail']);
 Route::post('/project/update/{id}',  [App\Http\Controllers\ProjectController::class, 'project_list_update']);
 Route::delete('/project/delete/{id}',  [App\Http\Controllers\ProjectController::class, 'project_list_delete']);
+Route::post('/guest-message',  [App\Http\Controllers\ProjectController::class, 'guest_message']);
+Route::get('/guest-message/list/{id}',  [App\Http\Controllers\ProjectController::class, 'guest_message_list']);
+
+
+
+
 // Route::post('/register', App\Http\Controllers\Api\RegisterController::class)->name('register');
 // Route::post('/login', App\Http\Controllers\Api\LoginController::class)->name('login');
 // Route::post('/logout', App\Http\Controllers\Api\LogoutController::class)->name('logout');

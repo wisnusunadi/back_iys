@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\GuestMessage;
 use App\Models\MusicList;
 use App\Models\ProjectList;
 use App\Models\TemplateList;
@@ -114,6 +115,48 @@ class ProjectController extends Controller
         }
     }
 
+
+    public function guest_message_list($id)
+    {
+        $data = GuestMessage::where('project_id', $id)->get();
+        return response()->json($data);
+    }
+    public function guest_message(Request $request)
+    {
+        try {
+            //code...
+            DB::beginTransaction();
+            if ($request->nama == '' || $request->message == '' || $request->project_id == '') {
+                DB::rollBack();
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Data tidak boleh kosong',
+                    'data' => ''
+                ], 500);
+            }
+
+            GuestMessage::create([
+                'nama' => $request->nama,
+                'message' => $request->message,
+                'project_id' => $request->project_id
+            ]);
+
+            DB::commit();
+            return response()->json([
+                'error' => false,
+                'message' => 'ok',
+                'data' => ''
+            ], 200);
+        } catch (\Throwable $th) {
+            //throw $th;
+            DB::rollBack();
+            return response()->json([
+                'error' => true,
+                'message' => 'Musik digunakan',
+                'data' => ''
+            ], 500);
+        }
+    }
 
     public function project_list_delete($id)
     {
@@ -512,7 +555,7 @@ class ProjectController extends Controller
                 ], 500);
             }
         } catch (\Throwable $th) {
-            //throw $th;   
+            //throw $th;
             return response()->json([
                 'data' => array(),
                 'message' => 'Kesalahan Server',

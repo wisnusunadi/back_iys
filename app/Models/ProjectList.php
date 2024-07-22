@@ -16,4 +16,9 @@ class ProjectList extends Model
     {
         return $this->belongsTo(TemplateList::class, 'template');
     }
+
+    function GuestMessage()
+    {
+        return $this->hasMany(GuestMessage::class);
+    }
 }
