@@ -254,7 +254,7 @@
 									<p> {{$data->waktuAkad}} pm</p>
 								</div>
 							</div>
-							@if($data->alamatAkad != '')
+							@if($data->alamatResepsi != '')
 							<div class="box-event bgi-cover-center" data-background="{{ asset('template_web/wedding_2/images/celeb.webp')}}">
 								<div class="event-location">
 									<a href="#"><i class="fa fa-facebook"></i></a> Check location here
@@ -267,7 +267,7 @@
 								</div>
 							</div>
 							@endif
-							@elseif($data->acara == 'engagement')
+							@else($data->acara == 'engagement')
 							<div class="box-event bgi-cover-center" data-background="{{ asset('template_web/wedding_2/images/wedding.webp')}}">
 								<div class="event-location">
 									<a href="#"><i class="fa fa-facebook"></i></a> Check location here
@@ -399,7 +399,10 @@
 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-CE0deH3Jhj6GN4YvdCFZS7DpbXexzGU&callback=initMap"> </script>
 
 	<script src="{{ asset('template_web/wedding_2/js/script.js')}}"></script>
-
+	<audio autoplay>
+		<source src="{{asset('project/'.$data->bgmusik)}}" type="audio/mpeg">
+		Your browser does not support the audio element.
+	</audio>
 </body>
 
 </html>

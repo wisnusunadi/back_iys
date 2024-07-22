@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/{value}', [App\Http\Controllers\ProjectController::class, 'get_undangan']);
+Route::get('/{value}/{nama?}', [App\Http\Controllers\ProjectController::class, 'get_undangan']);
+
 
 
 // Route::get('/link', function () {        

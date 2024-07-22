@@ -16,11 +16,13 @@ use Illuminate\Support\Carbon;
 class ProjectController extends Controller
 {
 
-    public function get_undangan($value)
+    public function get_undangan($value, $nama = '')
     {
+
         $getProject = ProjectList::where('link', $value);
         if ($getProject->count() > 0) {
             $getdata = ProjectList::find($getProject->first()->id);
+            $project_id = $getProject->first()->id;
             $data = json_decode($getdata->isi);
 
             if ($getdata->jenis == 'wedding') {
@@ -52,34 +54,34 @@ class ProjectController extends Controller
 
             switch ($getdata->template) {
                 case "1":
-                    return view('wedding-1', ['data' => $data, 'jenis' => $jenis]);
+                    return view('wedding-1', ['data' => $data, 'jenis' => $jenis, 'project_id' => $project_id, 'nama' => $nama]);
                     break;
                 case "2":
-                    return view('wedding-2', ['data' => $data, 'jenis' => $jenis]);
+                    return view('wedding-2', ['data' => $data, 'jenis' => $jenis, 'project_id' => $project_id, 'nama' => $nama]);
                     break;
                 case "3":
-                    return view('wedding-3', ['data' => $data, 'jenis' => $jenis]);
+                    return view('wedding-3', ['data' => $data, 'jenis' => $jenis, 'project_id' => $project_id, 'nama' => $nama]);
                     break;
                 case "4":
-                    return view('wedding-4', ['data' => $data, 'jenis' => $jenis]);
+                    return view('wedding-4', ['data' => $data, 'jenis' => $jenis, 'project_id' => $project_id, 'nama' => $nama]);
                     break;
                 case "5":
-                    return view('wedding-5', ['data' => $data, 'jenis' => $jenis]);
+                    return view('wedding-5', ['data' => $data, 'jenis' => $jenis, 'project_id' => $project_id, 'nama' => $nama]);
                     break;
                 case "6":
-                    return view('wedding-6', ['data' => $data, 'jenis' => $jenis]);
+                    return view('wedding-6', ['data' => $data, 'jenis' => $jenis, 'project_id' => $project_id, 'nama' => $nama]);
                     break;
                 case "7":
-                    return view('wedding-7', ['data' => $data, 'jenis' => $jenis]);
+                    return view('wedding-7', ['data' => $data, 'jenis' => $jenis, 'project_id' => $project_id, 'nama' => $nama]);
                     break;
                 case "8":
-                    return view('wedding-8', ['data' => $data, 'jenis' => $jenis]);
+                    return view('wedding-8', ['data' => $data, 'jenis' => $jenis, 'project_id' => $project_id, 'nama' => $nama]);
                     break;
                 case "9":
-                    return view('wedding-9', ['data' => $data, 'jenis' => $jenis]);
+                    return view('wedding-9', ['data' => $data, 'jenis' => $jenis, 'project_id' => $project_id, 'nama' => $nama]);
                     break;
                 case "10":
-                    return view('wedding-10', ['data' => $data, 'jenis' => $jenis]);
+                    return view('wedding-10', ['data' => $data, 'jenis' => $jenis, 'project_id' => $project_id, 'nama' => $nama]);
                     break;
                 default:
                     return 'kosong';
@@ -280,7 +282,9 @@ class ProjectController extends Controller
                     'fotoPria' => $fotoPria,
                     'gambarUtama' => $gambarUtama,
                     'gambarCover' => $gambarCover,
-                    'gallery' => $fotoGallery
+                    'gallery' => $fotoGallery,
+                    'noRek' =>  isset($request->noRek) ? $request->noRek : '',
+                    'ketRek' => isset($request->ketRek) ? $request->ketRek : '',
                 );
 
 
@@ -361,6 +365,8 @@ class ProjectController extends Controller
                     'fotoPria' => $fotoPria,
                     'gambarUtama' => $gambarUtama,
                     'gambarCover' => $gambarCover,
+                    'noRek' =>  isset($request->noRek) ? $request->noRek : '',
+                    'ketRek' => isset($request->ketRek) ? $request->ketRek : '',
                 );
 
 
@@ -446,6 +452,7 @@ class ProjectController extends Controller
 
 
                 $obj->checkedfotoPria = $checkedfotoPria;
+                $obj->checkedSumbangan = $obj->noRek != '' ? true : false;
                 $obj->checkedfotoWanita = $checkedfotoWanita;
                 $obj->gambarUtamaView = $gambarUtamaView;
                 $obj->gambarCoverView = $gambarCoverView;
@@ -476,6 +483,7 @@ class ProjectController extends Controller
                 }
 
                 $obj->checkedResepsi = $obj->alamatResepsi != '' ? true : false;
+                $obj->checkedSumbangan = $obj->noRek != '' ? true : false;
                 $obj->checkedfotoPria = $checkedfotoPria;
                 $obj->checkedfotoWanita = $checkedfotoWanita;
                 $obj->checkedGallery = $checkedGallery;
@@ -708,6 +716,8 @@ class ProjectController extends Controller
                     'fotoPria' => $fotoPria,
                     'gambarUtama' => $gambarUtama,
                     'gambarCover' => $gambarCover,
+                    'noRek' =>  isset($request->noRek) ? $request->noRek : '',
+                    'ketRek' => isset($request->ketRek) ? $request->ketRek : '',
                 );
 
                 $p =  ProjectList::create([
@@ -794,7 +804,9 @@ class ProjectController extends Controller
                     'fotoPria' => $fotoPria,
                     'gambarUtama' => $gambarUtama,
                     'gambarCover' => $gambarCover,
-                    'gallery' => $fotoGallery
+                    'gallery' => $fotoGallery,
+                    'noRek' =>  isset($request->noRek) ? $request->noRek : '',
+                    'ketRek' => isset($request->ketRek) ? $request->ketRek : '',
                 );
 
 
