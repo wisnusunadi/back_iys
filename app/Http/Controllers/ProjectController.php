@@ -24,6 +24,7 @@ class ProjectController extends Controller
             $getdata = ProjectList::find($getProject->first()->id);
             $project_id = $getProject->first()->id;
             $data = json_decode($getdata->isi);
+            $message = GuestMessage::where('project_id',  $getProject->first()->id)->get();
 
             if ($getdata->jenis == 'wedding') {
                 // $pasangan = explode(" ", $data->namaPasangan);
@@ -54,34 +55,37 @@ class ProjectController extends Controller
 
             switch ($getdata->template) {
                 case "1":
-                    return view('wedding-1', ['data' => $data, 'jenis' => $jenis, 'project_id' => $project_id, 'nama' => $nama]);
+                    return view('wedding-1', ['data' => $data, 'jenis' => $jenis, 'project_id' => $project_id, 'nama' => $nama, 'message' => $message]);
                     break;
                 case "2":
-                    return view('wedding-2', ['data' => $data, 'jenis' => $jenis, 'project_id' => $project_id, 'nama' => $nama]);
+                    return view('wedding-2', ['data' => $data, 'jenis' => $jenis, 'project_id' => $project_id, 'nama' => $nama, 'message' => $message]);
                     break;
                 case "3":
-                    return view('wedding-3', ['data' => $data, 'jenis' => $jenis, 'project_id' => $project_id, 'nama' => $nama]);
+                    return view('wedding-3', ['data' => $data, 'jenis' => $jenis, 'project_id' => $project_id, 'nama' => $nama, 'message' => $message]);
                     break;
                 case "4":
-                    return view('wedding-4', ['data' => $data, 'jenis' => $jenis, 'project_id' => $project_id, 'nama' => $nama]);
+                    return view('wedding-4', ['data' => $data, 'jenis' => $jenis, 'project_id' => $project_id, 'nama' => $nama, 'message' => $message]);
                     break;
                 case "5":
-                    return view('wedding-5', ['data' => $data, 'jenis' => $jenis, 'project_id' => $project_id, 'nama' => $nama]);
+                    return view('wedding-5', ['data' => $data, 'jenis' => $jenis, 'project_id' => $project_id, 'nama' => $nama, 'message' => $message]);
                     break;
                 case "6":
-                    return view('wedding-6', ['data' => $data, 'jenis' => $jenis, 'project_id' => $project_id, 'nama' => $nama]);
+                    return view('wedding-6', ['data' => $data, 'jenis' => $jenis, 'project_id' => $project_id, 'nama' => $nama, 'message' => $message]);
                     break;
                 case "7":
-                    return view('wedding-7', ['data' => $data, 'jenis' => $jenis, 'project_id' => $project_id, 'nama' => $nama]);
+                    return view('wedding-7', ['data' => $data, 'jenis' => $jenis, 'project_id' => $project_id, 'nama' => $nama, 'message' => $message]);
                     break;
                 case "8":
-                    return view('wedding-8', ['data' => $data, 'jenis' => $jenis, 'project_id' => $project_id, 'nama' => $nama]);
+                    return view('wedding-8', ['data' => $data, 'jenis' => $jenis, 'project_id' => $project_id, 'nama' => $nama, 'message' => $message]);
                     break;
                 case "9":
-                    return view('wedding-9', ['data' => $data, 'jenis' => $jenis, 'project_id' => $project_id, 'nama' => $nama]);
+                    return view('wedding-9', ['data' => $data, 'jenis' => $jenis, 'project_id' => $project_id, 'nama' => $nama, 'message' => $message]);
                     break;
                 case "10":
-                    return view('wedding-10', ['data' => $data, 'jenis' => $jenis, 'project_id' => $project_id, 'nama' => $nama]);
+                    return view('wedding-10', ['data' => $data, 'jenis' => $jenis, 'project_id' => $project_id, 'nama' => $nama, 'message' => $message]);
+                    break;
+                case "11":
+                    return view('wedding-11', ['data' => $data, 'jenis' => $jenis, 'project_id' => $project_id, 'nama' => $nama, 'message' => $message]);
                     break;
                 default:
                     return 'kosong';
@@ -144,11 +148,12 @@ class ProjectController extends Controller
             ]);
 
             DB::commit();
-            return response()->json([
-                'error' => false,
-                'message' => 'ok',
-                'data' => ''
-            ], 200);
+            // return response()->json([
+            //     'error' => false,
+            //     'message' => 'ok',
+            //     'data' => ''
+            // ], 200);
+            return back();
         } catch (\Throwable $th) {
             //throw $th;
             DB::rollBack();
